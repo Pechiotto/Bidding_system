@@ -1,50 +1,38 @@
 <!DOCTYPE html>
 <html lang="ja">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>コントラクトブリッジ・ビディングシステム</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>コントラクトブリッジ Bidding System</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
-    <header>
-        <h1>コントラクトブリッジ・ビディングシステム</h1>
-    </header>
-    <main>
+  <h1>コントラクトブリッジ Bidding System</h1>
+  <div id="bid-buttons">
+    <button class="bid-button" data-bid="1C">1C</button>
+    <button class="bid-button" data-bid="1D">1D</button>
+    <button class="bid-button" data-bid="1H">1H</button>
+    <button class="bid-button" data-bid="1S">1S</button>
+    <button class="bid-button" data-bid="1NT">1NT</button>
+    <!-- 他のビディングボタンを追加 -->
+  </div>
+  <table id="bidding-table">
+    <thead>
+      <tr>
+        <th>North</th>
+        <th>East</th>
+        <th>South</th>
+        <th>West</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- ビディング履歴がここに追加されます -->
+    </tbody>
+  </table>
 
-        <div id="bidding-table">
-            <table>
-                <thead>
-                    <tr>
-                        <th>North</th>
-                        <th>East</th>
-                        <th>South</th>
-                        <th>West</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- ビディング履歴がここに追加される -->
-                </tbody>
-            </table>
-        </div>
+  <!-- ビディング内容を表示する要素 -->
+  <div id="bid-content" class="bid-content"></div>
 
-        </div>
-        <div id="user-input">
-            <form id="bidding-form">
-                <label for="bid">あなたのビディング:</label>
-                <input type="text" id="bid" name="bid" placeholder="例: 1♠, pass, double">
-                <button type="submit">ビディングを送信</button>
-            </form>
-        </div>
-
-        </div>
-    </main>
-    <footer>
-        <p>Copyright &copy; 2023 - ブリッジアプリケーション</p>
-    </footer>
-
+  <script src="app.js"></script>
 </body>
-
 </html>
