@@ -9,9 +9,12 @@ function parseBBOalertTable(alertTableString) {
     const [bidString, alert] = alertString.split('=');
     const bids = bidString.split('/');
     bids.forEach((bid) => {
-      table[bid.trim()] = alert.trim();
+      if (bid && alert) {
+        table[bid.trim()] = alert.trim();
+      }
     });
   });
+
 
   return table;
 }
@@ -23,8 +26,11 @@ function parseBiddingSystem(systemString) {
 
   lines.forEach((line) => {
     const [bid, response] = line.split(',');
-    system[bid.trim()] = response.trim();
+    if (bid && response) {
+      system[bid.trim()] = response.trim();
+    }
   });
+
 
   return system;
 }
@@ -38,7 +44,7 @@ function showBidContent(bidContent) {
 // ボタンがクリックされたときの処理
 function handleBidButtonClick(event) {
   const bid = event.target.getAttribute('data-bid');
-  const alert = biddingTable[bid];
+  const alert = biddingSystemString[bid];
 
   if (alert) {
     addToBiddingHistory(2, bid, alert);
@@ -55,15 +61,54 @@ function handleBidButtonClick(event) {
   }
 }
 
-// BBOアラートテーブルの文字列
-const bboalertString = '1C=12-14bal/12+!C/18+any; 1D=0-6(7); any/8-11 unbal no 4M';
+function updateBiddingTable() {
+    const biddingTableBody = document.getElementById('bidding-table').querySelector('tbody');
+    biddingTableBody.innerHTML = '';
+  
+    biddingHistory.forEach((bidItem, index) => {
+      const row = document.createElement('tr');
+      const playerCell = document.createElement('td');
+      playerCell.textContent = bidItem.player;
+      row.appendChild(playerCell);
+  
+      const bidCell = document.createElement('td');
+      bidCell.textContent = bidItem.bid;
+      row.appendChild(bidCell);
+  
+      const alertCell = document.createElement('td');
+      if (bidItem.alert) {
+        alertCell.textContent = bidItem.alert;
+      } else {
+        alertCell.textContent = '-';
+      }
+      row.appendChild(alertCell);
+  
+      biddingTableBody.appendChild(row);
+  
+      if ((index + 1) % 4 === 0) {
+        const separatorRow = document.createElement('tr');
+        const separatorCell = document.createElement('td');
+        separatorCell.colSpan = 4;
+        separatorRow.appendChild(separatorCell);
+        biddingTableBody.appendChild(separatorRow);
+      }
+    });
+  }
 
-// BBOアラートテーブルを解析
-const biddingTable = parseBBOalertTable(bboalertString);
+  function addToBiddingHistory(player, bid, alert) {
+    const bidItem = {
+      player: player,
+      bid: bid,
+      alert: alert
+    };
+    biddingHistory.push(bidItem);
+    updateBiddingTable(); // 追加
+  }
+  
+  
 
 // ビディングシステムの文字列
-const biddingSystemString = `1C, 12-14bal/12+!C/18+any
-1D, 0-6(7); any/8-11 unbal no 4M`;
+const biddingSystemString = `1C, 12-14bal/12+!C/18+any; 1D, 0-6(7) any/8-11 unbal no 4M`;
 
 // ビディングシステムを解析
 const biddingSystem = parseBiddingSystem(biddingSystemString);
