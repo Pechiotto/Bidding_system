@@ -2,34 +2,24 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>コントラクトブリッジ Bidding System</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="app.js" defer></script>
+    <title>コントラクトブリッジのビディングシステム</title>
 </head>
 <body>
-    <h1>コントラクトブリッジ Bidding System</h1>
-    <table id="biddingTable">
-        <tr>
-            <th>bid</th>
-            <th>description</th>
-        </tr>
-        <tr>
-            <td><button class="club" data-bid="1C">1♣</button></td>
-            <td>12-14bal/12+!C/18+any</td>
-        </tr>
-        <tr>
-            <td><button class="diamond" data-bid="1D">1♦</button></td>
-            <td>12-17; 4-4-4-1 or 5+!D</td>
-        </tr>
-        <tr>
-            <td><button class="heart" data-bid="1H">1♥</button></td>
-            <td>10-17; 5+!H</td>
-        </tr>
-        <tr>
-            <td><button class="spade" data-bid="1S">1♠</button></td>
-            <td>10-17; 5+!S</td>
-        </tr>
+    <select id="select-system">
+        <option value="PC2020e">PC2020e</option>
+    </select>
+    <table id="bid-table" border="1">
+        <thead>
+            <tr>
+                <th>bid</th>
+                <th>description</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
     </table>
+    <script src="script.js" defer></script>
 </body>
 </html>
